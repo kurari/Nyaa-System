@@ -28,11 +28,11 @@ class SnsApp extends NyaaControllerApp
 			'url' => $this->Ctrl->getConf('site.url').'/app/conf',
 			'title' => '設定'
 		);
-		/*
 		$menu[] = array(
 			'url' => $this->Ctrl->getConf('site.url').'/app/sns.friends',
 			'title' => '友達'
 		);
+		/*
 		$menu[] = array(
 			'url' => $this->Ctrl->getConf('site.url').'/app/home',
 			'title' => '日記'

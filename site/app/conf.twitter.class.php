@@ -17,6 +17,23 @@ class ConfTwitterApp extends ConfApp
 		$this->uid = $this->Ctrl->getSession()->get('user.id');
 	}
 
+	function snipConf( $opt )
+	{
+		$pare = $this->twitter->getOAuthToken( $this->uid );
+		if($pare == false)
+		{
+			list($t,$s) = $this->twitter->newOAuthToken('http://localhost'.$this->Ctrl->getConf('site.url').'/app/conf.twitter/from/'.$opt['from']);
+			$_SESSION['con_key'] = $t;
+			$_SESSION['con_secret'] = $s;
+			$title = "連携する";
+			$url = $this->Ctrl->getConf('twitter.authurl').$t;
+		}else{
+			$title = "解除する";
+			$url = $this->Ctrl->getConf('site.url').'/app/conf.twitter/destroy/true/from/'.$opt['from'];
+		}
+		return compact('title','url');
+	}
+
 
 	function run( )
 	{
@@ -29,30 +46,15 @@ class ConfTwitterApp extends ConfApp
 			$token_secret = $this->Request->get('oauth_verifier');
 			$access_token = $this->twitter->verifieOAuthToken( $token_secret, $_SESSION['con_key'], $_SESSION['con_secret']);
 			$this->twitter->saveOAuth( $this->uid, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+			$this->Ctrl->redirect( $this->Request->get('from'), array('message'=>'登録しました') );
 		}
 
 		if( !$this->Request->isEmpty('destroy') )
 		{
 			$this->twitter->deleteOAuth( $this->uid );
+			$this->Ctrl->redirect( $this->Request->get('from'), array('message'=>'解除しました') );
 		}
 
-		$pare = $this->twitter->getOAuthToken( $this->uid );
-		if($pare == false)
-		{
-			list($t,$s) = $this->twitter->newOAuthToken('http://localhost'.$this->Ctrl->getConf('site.url').'/app/conf.twitter');
-			$_SESSION['con_key'] = $t;
-			$_SESSION['con_secret'] = $s;
-			$title = "連携する";
-			$url = $this->Ctrl->getConf('twitter.authurl').$t;
-		}else{
-			$title = "解除する";
-			$url = $this->Ctrl->getConf('site.url').'/app/conf.twitter/destroy/true';
-		}
-
-		$Tpl = $this->getTemplater( );
-		$Tpl->set('title', $title);
-		$Tpl->set('url', $url);
-		return $Tpl->fetch('conf.html');
 	}
 }
 ?>

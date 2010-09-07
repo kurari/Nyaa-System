@@ -1,4 +1,16 @@
 {{snippet app="sns.menus" template="user.menus.html" /}}
+<script>
+	function twitter_rt( name )
+	{
+		document.getElementById('tweet').value = 'RT @' + name + ' ' + text;
+		document.getElementById('tweet').focus();
+	}
+	function twitter_res( name )
+	{
+		document.getElementById('tweet').value = '@'+name+' ';
+		document.getElementById('tweet').focus();
+	}
+</script>
 <div class="design_2colum">
 <div class="left_area" style="padding-top:10px">
 	{{snippet app="user.profile" id=$session.user.id}}
@@ -21,17 +33,20 @@
 		{{$tweetForm->toHead()}}
 		{{$tweetForm->getInput('tweet')}}
 		{{$tweetForm->getInput('submit')}}
-		{{$tweetForm->toFoot()}}
+		{{$tweetForm->toTail()}}
 		{{foreach from=$twieet value=v key=k}}
 		<div>
 			<table>
 				<tr>
 					<td><img src="{{$v.img}}" align="left"></td>
+					<td>
+						<a onclick="twitter_res('{{$v.screen_name}}')">RES</a><br />
+						<a onclick="twitter_rt('{{$v.screen_name}}')">RT</a>
+					</td>
 					<td>{{$v.screen_name}} : {{$v.text | url}} <small>from {{$v.source}}</small></td>
 				</tr>
 			</table>
 		</div>
-
 		{{/foreach}}
 	</div>
 </div>

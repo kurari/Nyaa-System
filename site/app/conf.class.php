@@ -20,10 +20,6 @@ class ConfApp extends NyaaControllerApp
 			'title'=>"基本設定",
 			'url'=>"/app/conf"
 		);
-		$menus[] = array(
-			'title'=>"Twitter",
-			'url'=>"/app/conf.twitter"
-		);
 
 		return compact('menus');
 	}

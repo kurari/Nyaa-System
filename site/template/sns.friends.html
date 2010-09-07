@@ -1,23 +1,39 @@
-{{snippet app="sns.menus" template="file://user.menus.html" /}}
+{{snippet app="sns.menus" template="user.menus.html" /}}
 
-<h2>Friends</h2>
+<div class="design_2colum">
+	<div class="left_area">
+		{{snippet app="conf.menus"}}
+		{{foreach from=$menus key=k value=v}}
+		<a class="left_menu" href="{{$conf.site.url}}{{$v.url}}">{{$v.title}}</a>
+		{{/foreach}}
+		{{/snippet}}
+	</div>
 
-{{snippet app="sns.friends.search"}}
-<table>
-	<tr>
-		<th>&nbsp;</th>
-		<th>FamilyName</th>
-		<th>FirstName</th>
-	</tr>
-	{{foreach from=$users value=v key=k}}
-	<tr>
-		<td>{{$v.id}}</td>
-		<td>{{$v.familyName}}</td>
-		<td>{{$v.firstName}}</td>
-		<td>{{$v.birthday}}</td>
-		<td><a href="{{$conf.site.url}}/app/sns.showProfile/id/{{$v.id}}">プロフィール</a></td>
-	</tr>
-	{{/foreach}}
-</table>
+	<div class="main_area">
+		<div class="title">友達</div>
+		<div class="contents">
+			{{snippet app="sns.friends.search"}}
 
-{{/snippet}}
+			{{foreach from=$list value=v key=k}}
+			<table style="float:left;width:80px;">
+				<tr>
+					<td align="center" valign="bottom" style="height:80px">
+						<a href="{{$conf.site.url}}/app/profile.show/{{$k}}">
+							<img src="{{$conf.site.url}}/app/profile.photo/user/{{$k}}/show/user.jpg/size/75" />
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td align="center">
+						<a href="{{$conf.site.url}}/app/profile.show/{{$k}}">{{$v.screenName}}</a>
+					</td>
+				</tr>
+			</table>
+			{{/foreach}}
+			<hr style="clear:both;border:none" />
+
+
+			{{/snippet}}
+		</div>
+	</div>
+</div>

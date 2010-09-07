@@ -12,9 +12,13 @@
 	<div class="main_area">
 		<div class="title">Configure</div>
 		<div class="contents">
+			<h3>外部システム連携</h3>
 			<table class="form">
+				{{snippet app="conf.twitter.conf" from="conf"}}
 				<th>Twitter</th>
 				<td><a href="{{$url}}">{{$title}}</a></td>
+				<td>ツイッターを連携させます。</td>
+				{{/snippet}}
 			</table>
 			{{if is_object($form)}}
 			{{$form->toHead( )}}

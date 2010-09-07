@@ -6,30 +6,12 @@ class ProfileApp extends NyaaControllerApp
 	function init( )
 	{
 		$this->db = $this->Ctrl->get('db.system');
-	}
-
-	/*
-	function snipMenus( )
+	
+	}	
+	function getAll( )
 	{
-		$menus = array();
-		$menus[] = array(
-			'title'=>"写真",
-			'desc'=>"写真の変更",
-			'url'=>$this->Ctrl->getConf('site.url').'/app/profile.photo'
-		);
-		$menus[] = array(
-			'title'=>"基本情報",
-			'desc'=>"基本的な情報",
-			'url'=>$this->Ctrl->getConf('site.url').'/app/profile'
-		);
-		$menus[] = array(
-			'title'=>"ビジネス情報",
-			'desc'=>"ビジネスの情報",
-			'url'=>$this->Ctrl->getConf('site.url').'/app/profile.buisiness'
-		);
-		return array('profiles'=>$menus);
+		return $this->db->query('SELECT * FROM profile;');
 	}
-	 */
 
 
 	function formApply( $Req )
