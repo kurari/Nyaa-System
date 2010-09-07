@@ -1,0 +1,82 @@
+<style>
+	h2 {
+		margin : 10px 0px;
+	}
+
+	.form .field {
+		padding-top : 12px;
+		padding-bottom : 8px;
+		padding-right : 10px;
+		text-align : right;
+	}
+	.form .input input,
+	.form .input select,
+	.form .input option {
+		padding-top : 4px;
+		padding-bottom : 4px;
+		border-color : blue;
+	}
+
+	#form-main {
+		position : relative;
+	}
+	#regist-description {
+		margin-right : 300px;
+	}
+	#regist-form {
+		width : 300px;
+		float : right;
+	}
+	#regist-foot {
+		clear : both;
+	}
+
+</style>
+<div class="root-container">
+
+	<h2 class="page-title">User Register</h2>
+
+	<div id="form-main" class="message-box">
+		<div id="regist-form">
+			{{snippet app="user.register.form"}}
+
+			{{if count($errors) > 0}}
+			<div class="message-box error-box">
+				{{foreach from=$errors key=k value=v}}
+				{{$v}}<br />
+				{{/foreach}}
+			</div>
+			{{/if}}
+
+			{{$form->toHead()}}
+			<table class="form">
+				{{foreach from=$form->getInputs("familyName","firstName","email","password","gender","birthday") key=k value=v}}
+				<tr>
+					<th class="field">{{$v->toLabel()}}</th>
+					<td class="input">{{$v->toHtml()}}</td>
+				</tr>
+				{{/foreach}}
+				<tr>
+					<td>&nbsp;</td>
+					<td>{{$form->getInput('regist')}}</td>
+				</tr>
+			</table>
+			{{$form->toTail()}}
+			{{/snippet}}
+		</div>
+
+		<div id="regist-description">
+			ユーザ登録画面です。<br />
+			このサービスに登録すると開発のお手伝いができます。<br />
+			現在、求めているお手伝いさんは、デザイン、機能の向上に貢献してくれる方、
+			出来上がったシステムをテストしてくれる方、
+			ご意見などくれる方です。<br />
+			なにより、登録する事で登録のテストが出来ますw<br />
+			是非。。。
+		</div>
+
+		<div style="clear:both"></div>
+
+	</div>
+
+</div>

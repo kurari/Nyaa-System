@@ -1,0 +1,64 @@
+<style>
+	h2 {
+		margin : 10px 0px;
+	}
+</style>
+<div class="root-container">
+
+	<h2 class="page-title">User Login</h2>
+
+	<div class="message-box">
+		<p>
+		新規登録をする場合はサインインフォームで
+		初めてサインインするをチェックし、
+		パスワードは入力せずにサインインボタンを
+		クリックしてください。
+		</p>
+		<p>
+		既に登録してある場合は
+		メールアドレスとパスワードを入力し
+		サインインしてください。
+		</p>
+	</div>
+
+
+	<fieldset class="form">
+		<legend>サインインフォーム</legend>
+
+		{{snippet app="user.login.form"}}
+
+		{{if count($errors) > 0}}
+		<div class="message-box error-box">
+			{{foreach from=$errors key=k value=v}}
+			{{$v}}<br />
+			{{/foreach}}
+		</div>
+		{{/if}}
+
+		{{$form->toHead()}}
+		<table class="form">
+			<tr>
+				<th class="label">{{$email->toLabel()}}</th>
+				<td class="input">{{$email->toHtml()}}</td>
+				<td class="input"rowspan="2" colspan="2" align="left" valign="top">
+					{{$saveLogin->toHtml()}}&nbsp;{{$saveLogin->toLabel()}}
+					<br />
+					{{$toRegist->toHtml()}}&nbsp;{{$toRegist->toLabel()}}
+				</td>
+			</tr>
+			<tr>
+				<th class="label">{{$password->toLabel()}}</th>
+				<td class="input">{{$password->toHtml()}}</td>
+			</tr>
+			<tr>
+				<td class="button" colspan="3" align="right">{{$signin->toHtml()}}</td>
+			</tr>
+		</table>
+		{{$form->toTail()}}
+		{{/snippet}}
+
+	</fieldset>
+
+
+
+</div>

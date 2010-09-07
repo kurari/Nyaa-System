@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="{{$conf.site.url}}/resource/css/root.css" />
+		<title>{{$conf.site.title}}</title>
+	</head>
+	<body>
+		<div id="header">
+			<div class="logo">
+				<h1>{{$Ctrl->getConf('site.title')}}</h1>
+			</div>
+
+			<div id="global-navi">
+				{{snippet app="system.menus"}}
+				{{foreach from=$menus key=k value=v}}
+				<a href="{{$v.url}}">{{$v.title}}</a>
+				{{/foreach}}
+				{{/snippet}}
+				<hr style="clear:both;border:none;" />
+			</div>
+
+			<div class="right-box">
+				{{if $session.user.id != ""}}
+				Wellcome: 
+					{{$session.user.familyName}}
+					{{$session.user.firstName}}
+					<a href="{{$conf.site.url}}/app/home">ホーム</a>
+					<a href="{{$conf.site.url}}/app/user.logout">ログアウト</a>
+				{{else}}
+					<a href="{{$conf.site.url}}/app/user.login">ログイン/新規登録</a>
+				{{/if}}
+			</div>
+		</div>
+
+		<div class="root-container">
+			{{$contents}}
+		</div>
+	</body>
+</html>

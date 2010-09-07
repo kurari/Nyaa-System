@@ -1,0 +1,110 @@
+/**
+ * Theme CSS
+ *
+ */
+
+body {
+color                : #404040;
+}
+a {
+color                : #98A9CA;
+text-decoration      : none;
+}
+a                    : hover {
+color                : #a88;
+}
+
+input {
+border               : solid 1px #333;
+color                : black;
+padding              : 2px;
+}
+input[type=submit]{
+background           : #5B74A8;
+color                : #FDFDFD;
+border               : none;
+border-top           : solid 1px #BBB;
+padding              : 2px 5px 3px 5px;
+font-size            : 12px;
+}
+input[type=submit]   : active {
+background           : #4F6AA3;
+border-top           : solid 1px #4F6AA3;
+}
+
+/**
+* 基本パーツ
+*/
+#header {
+background-color     : #3B5998;
+color                : #F0F0F0;
+padding              : 10px 10px 0px 10px;
+position             : relative;
+font-size            : 12px;
+}
+#header h1 {
+float                : left;
+font-size            : 150%;
+}
+#header .right-box {
+position             : absolute;
+bottom               : 2px;
+right                : 2px;
+}
+#global-navi {
+margin-left          : 320px;
+margin-right         : 260px;
+background           : #FFDD3E;
+}
+#global-navi a{
+display              : block;
+padding              : 7px 10px 2px 10px;
+float                : left;
+}
+.root-container {
+padding              : 0px;
+}
+
+
+/**
+ * pattern
+ */
+.design_2colum * { 
+	font-size : 12px;
+}
+.design_2colum .left_area { 
+	font-size : 11px;
+	float     : left;
+	width     : 200px;
+}
+.design_2colum .left_area * { 
+	font-size : 11px;
+}
+.design_2colum .left_area .left_menu { 
+	display : block;
+	color : #333;
+	padding : 5px 10px;
+}
+.design_2colum .left_area .left_menu:hover { 
+	background : #D8DFEA;
+}
+.design_2colum .main_area {
+	border-left : solid 1px #B3B3B3;
+	margin-left : 200px;
+}
+
+.design_2colum .main_area .title {
+	padding : 10px;
+}
+.design_2colum .main_area .contents {
+	border-top : solid 1px #B3B3B3;
+	background : #F2F2F2;
+}
+
+/**
+ * form
+ */
+table.form th {
+	text-align : right;
+	padding-right : 10px;
+}

@@ -1,0 +1,33 @@
+{{snippet app="sns.menus" template="user.menus.html" /}}
+
+<div class="design_2colum">
+	<div class="left_area">
+		{{snippet app="conf.menus"}}
+		{{foreach from=$menus key=k value=v}}
+		<a class="left_menu" href="{{$conf.site.url}}{{$v.url}}">{{$v.title}}</a>
+		{{/foreach}}
+		{{/snippet}}
+	</div>
+
+	<div class="main_area">
+		<div class="title">Configure</div>
+		<div class="contents">
+			<table class="form">
+				<th>Twitter</th>
+				<td><a href="{{$url}}">{{$title}}</a></td>
+			</table>
+			{{if is_object($form)}}
+			{{$form->toHead( )}}
+			<table class="form">
+				{{foreach from=$form->getInputs() key=k value=v}}
+				<tr>
+					<th>{{$v->toLabel()}}</th>
+					<td>{{$v}}</td>
+				</tr>
+				{{/foreach}}
+			</table>
+			{{$form->toTail( )}}
+			{{/if}}
+		</div>
+	</div>
+</div>

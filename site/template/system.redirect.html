@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<title>...Redirecting</title>
+	<style>
+		.message {
+			padding : 100px;
+		}
+	</style>
+	<script>
+		function redirect( )
+		{
+			document.getElementById('__REDIRECT_FORM').submit();
+		}
+		window.onload = function()
+		{
+			window.setTimeout('redirect()', 1000);
+		}
+	</script>
+</head>
+<body>
+
+<div class="message">
+	{{$Request->get('message')}}
+	<a href="javascript:redirect()">OK</a>
+	<form 
+		method="post" 
+		id="__REDIRECT_FORM" 
+		action="{{$conf.site.url}}/app/{{$Request->get('redirect-to')}}">
+		{{foreach from=$Request->get('vars') key=k value=v}}
+		<input type="hidden" name="{{$k}}" value="{{$v}}" />
+		{{/foreach}}
+	</form>
+</div>
+
+</body>
+</html>

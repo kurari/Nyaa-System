@@ -1,0 +1,49 @@
+{{snippet app="sns.friendsmenus" template="user.menus.html" id=$id /}}
+<div class="contents">
+
+	<div class="alert">
+		あなたが{{$profile.screenName}}さんと知り合いなら友達になりましょう。
+		<a href="{{$conf.site.url}}/app/sns.friend.add/{{$id}}">友達になる</a>
+		<a href="{{$conf.site.url}}/app/sns.list.add/{{$id}}">お気に入りに登録</a>
+	</div>
+
+	<table>
+
+		<tr>
+			<td>
+				<h1>{{$profile.screenName}}</h1>
+				<table>
+					<tr>
+						<th>本名</th>
+						<td>{{$profile.familyName}} {{$profile.firstName}}</td>
+					</tr>
+					<tr>
+						<th>血液型</th>
+						<td>{{$profile.blad}}</td>
+					</tr>
+					<tr>
+						<th>誕生日</th>
+						<td>{{$profile.birthday.year}}年{{$profile.birthday.month}}月{{$profile.birthday.day}}日</td>
+					</tr>
+					<tr>
+						<th>現在地</th>
+						<td>{{$profile.location}}</td>
+					</tr>
+					<tr>
+						<th>出身</th>
+						<td>{{$profile.locationFrom1}} {{$profile.locationFrom2}}</td>
+					</tr>
+				</table>
+			</td>
+			<td>
+				<blockquote>
+					{{$profile.pr}}
+				</blockquote>
+
+			</td>
+		</tr>
+	</table>
+
+
+
+</div>

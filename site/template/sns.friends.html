@@ -1,0 +1,23 @@
+{{snippet app="sns.menus" template="file://user.menus.html" /}}
+
+<h2>Friends</h2>
+
+{{snippet app="sns.friends.search"}}
+<table>
+	<tr>
+		<th>&nbsp;</th>
+		<th>FamilyName</th>
+		<th>FirstName</th>
+	</tr>
+	{{foreach from=$users value=v key=k}}
+	<tr>
+		<td>{{$v.id}}</td>
+		<td>{{$v.familyName}}</td>
+		<td>{{$v.firstName}}</td>
+		<td>{{$v.birthday}}</td>
+		<td><a href="{{$conf.site.url}}/app/sns.showProfile/id/{{$v.id}}">プロフィール</a></td>
+	</tr>
+	{{/foreach}}
+</table>
+
+{{/snippet}}

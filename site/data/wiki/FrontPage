@@ -1,0 +1,95 @@
+= For Developper =
+
+* [[チュートリアル]]
+* [[構想]]
+
+
+== サーバー条件 ==
+
+* PHP > 5.3 
+ * sqliteが有効
+* apache > 2.0
+* Wikiを使用する場合
+ * /usr/bin/source-highlight が起動する事
+
+== インストール方法 ==
+
+* 導入
+ * ソースコード一式をダウンロードする。
+  * デベロッパーアカウントでログインする。
+ * パーミッション変更
+  * cache => 777
+  * data => 777
+  * data/wiki => 777
+  * data/system.db => 777
+* 設定変更
+ * root.conf
+  * site.name => 好きな名前
+  * site.url => 環境に合わせたURL
+
+
+== カスタマイズ方法 ==
+
+* 前提環境
+ * urlはhttp://localhost/とします。
+* URLとの関係
+ * http://localhost/app/system.defaultはapp/system.default.class.phpを呼び出し、SystemDefaultAppを構築し、runメソッドを呼び出します。
+
+== スニペット ==
+このフレームワークは、テンプレートからアプリケーションへ自由なアクセスが可能です。
+グローバルメニュー書き出し部分のサンプルです。
+
+* テンプレート
+{{{ highlight=html |
+<div id="global-navi">
+	{{snippet app="system.menus"}}
+	{{foreach from=$menus key=k value=v}}
+	<a href="{{$v.url}}">{{$v.title}}</a>
+	{{/foreach}}
+	{{/snippet}}
+	<hr style="clear:left" />
+</div>
+}}}
+* アプリケーション file=app/system.class.php
+{{{ highlight=php |
+class SystemApp extends NyaaControllerApp
+{
+	function snipMenus( )
+	{
+		$menu = array();
+
+		if(!empty($this->uid))
+		{
+			// Logined
+			$menu[] = array(
+				'url' => $this->Ctrl->getConf('site.url').'/app/home',
+				'title' => 'HOME'
+			);
+		}
+		$menu[] = array(
+			'url' => $this->Ctrl->getConf('site.url').'/app/system.default',
+			'title' => 'TOP'
+		);
+		$menu[] = array(
+			'url' => $this->Ctrl->getConf('site.url').'/app/system.default',
+			'title' => 'CHAT'
+		);
+		$menu[] = array(
+			'url' => $this->Ctrl->getConf('site.url').'/app/system.default',
+			'title' => 'BBS'
+		);
+		$menu[] = array(
+			'url' => $this->Ctrl->getConf('site.url').'/app/wiki',
+			'title' => 'WIKI'
+		);
+		return array('menus'=>$menu);
+	}
+}
+}}}
+
+=== スニペットの閉じタグを省略する ===
+* テンプレートリソースを指定し、タグ内の最後を/にする事で省略可能です。
+{{{ highlight=html |
+{{snippet app="sns.menus" template="file://user.menus.html" /}}
+<h2>Profile</h2>
+}}}

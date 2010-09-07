@@ -1,0 +1,34 @@
+/**
+ * Parts集
+ */
+
+.message-box {
+	padding    : 10px 20px;
+	color      : #555;
+	border     : solid 1px red;
+	background : #FFFFD5;
+}
+
+.error-box {
+	background-image : url(../img/error.25x25.png);
+	background-repeat : no-repeat;
+	background-position : 5px 5px;
+	padding-left : 38px;
+}
+
+/**
+ * For Form
+ */
+fieldset.form {
+	padding:20px;
+ 	margin-top: 20px; 
+	border : 1px solid #666;
+}
+table.form th.label,
+table.form td.input {
+	padding-top : 7px;
+}
+table.form td input[type=submit] {
+	padding-left : 20px;
+	padding-right : 20px;
+}

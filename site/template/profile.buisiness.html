@@ -1,0 +1,33 @@
+{{snippet app="sns.menus" template="file://user.menus.html" /}}
+
+<h2>Profile</h2>
+<table>
+	<tr>
+		<td valign="top">
+			{{snippet app="profile.menus"}}
+
+			{{foreach from=$profiles value=v key=k }}
+			<h3><a href="{{$v.url}}">{{$v.title}}</a></h3>
+			<p>{{$v.desc}}</p>
+			{{/foreach}}
+
+			{{/snippet}}
+		</td>
+		<td>
+
+			{{snippet app="profile.buisiness.form"}}
+			{{$form->toHead( )}}
+			<table class="form">
+				{{foreach from=$form->getInputs() key=k value=v}}
+				<tr>
+					<th>{{$v->toLabel()}}</th>
+					<td>{{$v}}</td>
+					<td>{{if $v->getProp('type') != 'submit'}}{{$v->ask}}{{/if}}</td>
+				</tr>
+				{{/foreach}}
+			</table>
+			{{$form->toTail( )}}
+			{{/snippet}}
+		</td>
+	</tr>
+</table>

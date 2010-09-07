@@ -1,0 +1,82 @@
+{{snippet app="sns.menus" template="user.menus.html" /}}
+<div class="design_2colum">
+<div class="left_area" style="padding-top:10px">
+	{{snippet app="user.profile" id=$session.user.id}}
+	<div style="text-align:center">
+		<img src="{{$conf.site.url}}/app/profile.photo/user/{{$id}}/show/user.jpg/size/150" /><br />
+		<b>{{$familyName}}</b><b>{{$firstName}}さん</b>
+	</div>
+	{{/snippet}}
+
+	<a href="#" class="left_menu">更新情報</a>
+	<a href="#" class="left_menu">プロフィール</a>
+	<a href="#" class="left_menu">友達</a>
+	<a href="#" class="left_menu">足跡</a>
+	<a href="#" class="left_menu">設定</a>
+</div>
+
+<div class="main_area">
+	<div class="title">Hajime MATSUMOTO</div>
+	<div class="contents">
+		{{$tweetForm->toHead()}}
+		{{$tweetForm->getInput('tweet')}}
+		{{$tweetForm->getInput('submit')}}
+		{{$tweetForm->toFoot()}}
+		{{foreach from=$twieet value=v key=k}}
+		<div>
+			<table>
+				<tr>
+					<td><img src="{{$v.img}}" align="left"></td>
+					<td>{{$v.screen_name}} : {{$v.text | url}} <small>from {{$v.source}}</small></td>
+				</tr>
+			</table>
+		</div>
+
+		{{/foreach}}
+	</div>
+</div>
+
+</div>
+
+<!--
+<div style="text-align:right">
+人やコミュニティを探す<input type="text">
+<select>
+	<option>全て</option>
+	<option>人物</option>
+	<option>人物:名前</option>
+	<option>人物:現在地</option>
+	<option>人物:出身地</option>
+	<option>コミュニティ</option>
+</select>
+<input type="submit" value="検索" />
+</div>
+
+<div id="user-left">
+	<img src="{{$conf.site.url}}/app/profile.photo/user/{{$id}}/show/user.jpg/size/200" />
+
+	{{snippet app="user.profile" id=$session.user.id}}
+	<div>
+		<b>{{$familyName}} {{$firstName}}さん</b>
+		<a href="{{$conf.site.url}}/app/profile.photo">写真を変更する</a>
+	</div>
+	{{/snippet}}
+
+	<div id="toolbox">
+		<h3>ツールボックス</h3>
+		<a href="#">メールマガジン</a><br />
+		<a href="#">SNS設定</a><br />
+		<a href="#">アンケート作成</a><br />
+	</div>
+</div>
+
+<div id="user-center">
+	ユーザ用のホーム画面
+	<li>お知らせ
+	<ul>
+		<li>新着メッセージが1件あります。</li>
+	</ul>
+	</li>
+
+</div>
+//-->

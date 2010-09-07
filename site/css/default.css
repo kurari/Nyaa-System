@@ -1,0 +1,27 @@
+/**
+ * Default CSS
+ */
+* {
+	padding : 0px;
+	margin : 0px;
+}
+h1 {
+	font-size : 200%;
+}
+h2 {
+	font-size : 170%;
+}
+h3 {
+	font-size : 150%;
+}
+h4 {
+	font-size : 130%;
+}
+h5 {
+	font-size : 110%;
+}
+ul {
+	margin-top      : 5px;
+	margin-bottom   : 5px;
+	margin-left     : 20px;
+}
