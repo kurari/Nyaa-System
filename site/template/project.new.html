@@ -1,0 +1,18 @@
+{{snippet app="sns.menus" template="user.menus.html" /}}
+
+<div class="design_2colum">
+	<div class="left_area">
+		{{snippet app="project.menus"}}
+		{{foreach from=$menus key=k value=v}}
+		<a class="left_menu" href="{{$conf.site.url}}{{$v.url}}">{{$v.title}}</a>
+		{{/foreach}}
+		{{/snippet}}
+	</div>
+
+	<div class="main_area">
+		<div class="title">Project New</div>
+		<div class="contents">
+			{{snippet app="project.new.form" template="default.form.html" /}}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,19 @@
+{{$form->toHead()}}
+
+{{if !$result->isEmpty('errors')}}{{foreach from=$result->get('errors') value=v key=k}}
+<li>{{$v}}</li>
+{{/foreach}}{{/if}}
+
+{{if !$result->isEmpty('option.message')}}
+{{$result->get('option.message')}}
+{{/if}}
+
+<table class="form">
+	{{foreach from=$form->getInputs() key=k value=v}}
+	<tr>
+		<th>{{$v->toLabel()}}</th>
+		<td>{{$v}}</td>
+	</tr>
+	{{/foreach}}
+</table>
+{{$form->toTail( )}}

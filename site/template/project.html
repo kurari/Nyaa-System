@@ -1,0 +1,29 @@
+{{snippet app="sns.menus" template="user.menus.html" /}}
+
+<div class="design_2colum">
+	<div class="left_area">
+		{{snippet app="project.menus"}}
+		{{foreach from=$menus key=k value=v}}
+		<a class="left_menu" href="{{$conf.site.url}}{{$v.url}}">{{$v.title}}</a>
+		{{/foreach}}
+		{{/snippet}}
+	</div>
+
+	<div class="main_area">
+		<div class="title">Project Master</div>
+		<div class="contents">
+			{{snippet app="project.list"}}
+			<table>
+				{{foreach from=$list value=v key=k}}
+				<tr>
+					<td>{{$v.id}}</td>
+					<td><a href="{{$conf.site.url}}/app/project.show/id/{{$v.id}}">{{$v.name}}</a></td>
+					<td>{{$v.desc}}</td>
+				</tr>
+				{{/foreach}}
+			</table>
+			<hr style="clear:both;border:none" />
+			{{/snippet}}
+		</div>
+	</div>
+</div>

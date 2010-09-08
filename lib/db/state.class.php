@@ -78,6 +78,8 @@ class NyaaDBState extends NyaaStore implements IteratorAggregate{
 				$data[] =sprintf('"%s"', $this->DAO->escape( $v ) );
 			}
 			$this->set( $key, implode(',', $data) );
+		}elseif($type == "int"){
+			$this->set( $key, sprintf('%s', $this->DAO->escape( $value ) ));
 		}else{
 			$this->set( $key, sprintf('"%s"', $this->DAO->escape( $value ) ));
 		}

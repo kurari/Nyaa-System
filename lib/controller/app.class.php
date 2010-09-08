@@ -11,10 +11,11 @@
  */
 class NyaaControllerApp extends NyaaStore
 {
-	protected $Ctrl;
-	protected $Request;
-	public $stylesheets = array();
-	protected $view = 'system.default.html';
+	protected   $Ctrl;
+	protected   $Conf;
+	protected   $Request;
+	public      $stylesheets   =   array();
+	protected   $view          =   'system.default.html';
 
 	public function runSnippet( $method, $opt = array(), $template )
 	{
@@ -36,6 +37,9 @@ class NyaaControllerApp extends NyaaStore
 	{
 		parent::__construct( );
 		$this->Ctrl = $Ctrl;
+		$this->Conf = new NyaaStore();
+		$this->Conf->set($Ctrl->getConf( ));
+		$this->Session = $Ctrl->getSession( );
 	}
 
 	public function init( )
@@ -60,6 +64,103 @@ class NyaaControllerApp extends NyaaStore
 		$Tpl = $this->getTemplater( );
 		$Tpl->set($this->get());
 		return $Tpl->fetch( $this->view );
+	}
+
+	public function getConf( )
+	{
+		$args = func_get_args( );
+		return call_user_func_array(array($this->Conf,'get'),$args);
+	}
+
+	function getSession( )
+	{
+		$args = func_get_args( );
+		return call_user_func_array(array($this->Session,'get'),$args);
+	}
+		
+
+	function dbFactory( $con )
+	{
+		require_once 'db/db.class.php';
+		$handler = NyaaDB::factory( $con );
+		return $handler;
+	}
+
+	function formFactory( $conf,  $formName, $applyName )
+	{
+		require_once 'form/form.class.php';
+		$form     = new NyaaForm( );
+		$form->loadFile($conf);
+		$form->addHidden('__FORM__', $applyName);
+		$form->addHidden('__APPLY_FROM__', $formName);
+		return $form;
+	}
+	function validaterFactory( $conf )
+	{
+		require_once 'validater/validate.class.php';
+		require_once 'validater/validater.class.php';
+
+		$conf = NyaaConf::load( $conf );
+		$validater = new NyaaValidater( );
+		foreach($conf->get( ) as $k=>$v)
+		{
+			$validate = NyaaValidate::factory(
+				array(
+					'type'    => $v['type'],
+					'target'  => $v['target'],
+					'message' => $v['message'],
+					'con'     => $v['message_sep']
+				)
+			);
+			$validater->addValidate( $validate );
+		}
+		return $validater;
+	}
+
+	function getResult( $key )
+	{
+		$result = $this->Ctrl->getResult( $key );
+		if(!is_object($result))
+			return $this->resultSuccess();
+		return $result = $this->Ctrl->getResult( $key );
+	}
+
+	function resultError( $Req, $errors = array() )
+	{
+		$result  = $this->Ctrl->resultFactory(array(
+			'status'  => 'error',
+			'request' => $Req->get(),
+			'errors'  => $errors
+		));
+		return $result;
+	}
+
+	function resultSuccess( $opt = array() )
+	{
+		$result  = $this->Ctrl->resultFactory(array(
+			'status'  => 'success',
+			'option' => $opt
+		));
+		return $result;
+	}
+	function resultRedirect( $url, $opt = array() )
+	{
+		$result  = $this->Ctrl->resultFactory(array(
+			'status'  => 'redirect',
+			'redirect' => $url,
+			'option' => $opt
+		));
+		return $result;
+	}
+
+	function resultFactory( $name, $Req )
+	{
+		$result  = $this->Ctrl->resultFactory(array(
+			'status'=>$name,
+			'request'=>$Req->get()
+		));
+
+		return $result;
 	}
 
 	public function templateSnipForm( $conf, $formName, $applyName)

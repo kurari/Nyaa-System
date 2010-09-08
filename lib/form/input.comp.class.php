@@ -20,17 +20,33 @@ class NyaaFormInputComp extends NyaaFormInput
 		$this->child = $child;
 	}
 
+	function setLayout( $layout )
+	{
+		$this->layout = $layout;
+	}
+	function setLayout_start( $layout )
+	{
+		$this->layout_start = $layout;
+	}
+	function setLayout_end( $layout )
+	{
+		$this->layout_end = $layout;
+	}
+
 
 
 	function toHtml( )
 	{
-		$html="<table>";
+		$html= $this->layout_start;
 		foreach($this->child as $k=>$v)
 		{
 			$e = $this->factory(array_merge(array('name'=>$k), $v));
-			$html.= '<tr><th align="left">'.$e->toLabel()."</th></tr><tr><td>".$e->toHtml()."</td></tr>";
+			$main = preg_replace('/%html/',$e->toHtml(), $this->layout);
+			$main = preg_replace('/%label/',$e->toLabel(), $main);
+
+			$html .= $main;
 		}
-			$html.= '</table>';
+		$html .= $this->layout_end;
 
 		return $html;
 

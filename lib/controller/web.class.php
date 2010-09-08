@@ -98,7 +98,12 @@ class NyaaControllerWeb extends NyaaController
 			return $data;
 
 		$cloneTpl          = clone($templater);
-		$cloneTpl->set( $data );
+		if(isset($opt['root']))
+		{
+			$cloneTpl->set($opt['root'], $data );
+		}
+		else
+			$cloneTpl->set( $data );
 
 		if( isset($opt['template'] ) )
 			return $cloneTpl->fetch( $opt['template'] );

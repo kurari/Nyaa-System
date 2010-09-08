@@ -1,0 +1,29 @@
+{{snippet app="sns.menus" template="user.menus.html" /}}
+
+<div class="design_2colum">
+	<div class="left_area">
+		{{snippet app="project.menus"}}
+		{{foreach from=$menus key=k value=v}}
+		<a class="left_menu" href="{{$conf.site.url}}{{$v.url}}">{{$v.title}}</a>
+		{{/foreach}}
+		{{/snippet}}
+
+		<a class="left_menu" href="{{$conf.site.url}}/app/project.task.add/id/{{$project_id}}">タスクリスト</a>
+		<a class="left_menu" href="{{$conf.site.url}}/app/project.task.list/id/{{$project_id}}">タスクを追加</a>
+		<a class="left_menu" href="{{$conf.site.url}}/app/project.add/id/{{$project_id}}">サブプロジェクトリスト</a>
+		<a class="left_menu" href="{{$conf.site.url}}/app/project.list/id/{{$project_id}}">サブプロジェクトを追加</a>
+		<a class="left_menu" href="{{$conf.site.url}}/app/project.user.list/{{$project_id}}">ユーザーリスト</a>
+		<a class="left_menu" href="{{$conf.site.url}}/app/project.user.add/{{$project_id}}">ユーザーを追加</a>
+	</div>
+
+	<div class="main_area">
+		{{snippet app="project.show.info" id=$project_id root="p" }}
+		<div class="title">{{$p.name}} by {{$p.uid}}</div>
+		<div class="contents">
+			<blockquote>
+				{{$p.desc}}
+			</blockquote>
+		</div>
+		{{/snippet}}
+	</div>
+</div>
